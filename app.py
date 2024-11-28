@@ -5,24 +5,43 @@ import yt_dlp
 import random
 import string
 import asyncio
+import nest_asyncio
+import aiofiles
 import subprocess
 from PIL import Image
 import assemblyai as aai
-import aiofiles
 from dotenv import load_dotenv
 from telebot.async_telebot import AsyncTeleBot
 from concurrent.futures import ThreadPoolExecutor
 from youtube_transcript_api import YouTubeTranscriptApi
-from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup
+from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup, Update
 
-
+nest_asyncio.apply()
 load_dotenv()
 
 executor = ThreadPoolExecutor()
 
 TOKEN = os.getenv('token')
 bot = AsyncTeleBot(TOKEN)
+API_TOKEN = "https://api.telegram.org/bot7850075733:AAHBSWDaK1runrIhIs5Q4AgnTuAdFyoXQrs/setWebhook?url=https://cbd5-185-238-219-112.ngrok-free.app"
 channel_id = '@ghad_ebdai_com'
+
+# app = Flask(__name__)
+
+# application = app
+
+
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------
+# @app.route('/' + TOKEN, methods=['POST'])
+# async def receive_update():
+#     json_str = request.get_data().decode('UTF-8')
+#     update = Update.de_json(json_str)
+#     await bot.process_new_updates([update])  # تأكد من استخدام await
+#     return '!', 200
+
+
 
 # الاوامر الاساسية
 #------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -214,18 +233,18 @@ async def handle_url_message(message):
         await help(message)
         await main_menu(user_id)
 
-    if user_id not in user_selected and not any(word in message.text for word in helper):
+    if user_id not in user_selected and not any(word in message.text for word in helper) and not message.text.startswith('http') :
         await bot.send_message(user_id, 'لم تقم باختيار أي من خيارات البوت.\nاذا كنت بحاجة الى مساعدة قم بارسال "مساعدة" او /help')
         return
 
     # لتحميل الوسائط بناءً على الأوامر
     if user_state.get(user_id) == 'video_url':
         if chick_follow(message):
-            if message.text.startswith('http') or message.text in welper:
+            if message.text.startswith('http'):
                 await ready_download_video(message)
                 del user_state[message.chat.id]
                 await main_menu(user_id, message.message_id)
-            elif not message.text.startswith('http') or not message.text in welper:
+            elif not message.text.startswith('http'):
                 await bot.send_message(user_id, 'رجاءً ارسل رابط صالح!')
 
     elif user_state.get(user_id) == 'audio_url':
@@ -604,3 +623,5 @@ async def chick_follow(message):
 
 # تشغيل البوت
 asyncio.run(bot.infinity_polling())
+
+# asyncio.run(app.run(port=8000, host="0.0.0.0"))
