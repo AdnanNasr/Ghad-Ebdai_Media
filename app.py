@@ -414,7 +414,8 @@ async def download_video(url):
     ydl_opts = {
         'format': 'best',
         'outtmpl': f'%(id)s_{uuid.uuid4()}.mp4',
-        'retries': 3
+        'retries': 3,
+        'usenetrc': True
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -440,7 +441,8 @@ async def download_audio(url):
     ydl_opts = {
         'format': 'bestaudio/best',
         'outtmpl': '%(title)s.%(ext)s',
-        'retries': 3
+        'retries': 3,
+        'usenetrc': True
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -466,7 +468,7 @@ async def download_thumbnail(video_url):
         thumbnail_filename = f'{unique_id}.%(ext)s'
 
         command_download_thumbnail = [
-            'yt-dlp', '--output', thumbnail_filename, '--write-thumbnail', '--skip-download', video_url
+            'yt-dlp', '--output', thumbnail_filename, '--write-thumbnail', '--skip-download', '--netrc', video_url
         ]
 
         await asyncio.get_event_loop().run_in_executor(
