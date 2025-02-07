@@ -37,7 +37,7 @@ After obtaining your token, you need to set up the bot on your system:
 ## الخطوة 2: تنزيل كود البوت  
 بعد الحصول على التوكن، عليكم تنزيل كود البوت على جهازكم:  
 
-1. قموا باستنساخ (Clone) مستودع الكود باستخدام **Git**: `git clone <repository_url>` ثم انتقلوا إلى المجلد باستخدام الأمر `cd <repository_name>`.  
+1. قوموا باستنساخ (Clone) مستودع الكود باستخدام **Git**: `git clone <repository_url>` ثم انتقلوا إلى المجلد باستخدام الأمر `cd <repository_name>`.  
 2. ثبّتوا المكتبات المطلوبة عبر **pip**: `pip install -r requirements.txt`.  
 
 ## الخطوة 3: ضبط وتشغيل البوت  
