@@ -22,7 +22,7 @@ load_dotenv()
 executor = ThreadPoolExecutor()
 
 # ضع التوكن الخاص بك هنا
-TOKEN = '7850075733:AAHBSWDaK1runrIhIs5Q4AgnTuAdFyoXQrs'
+TOKEN = 'TELEGRAM_TOKEN_HERE'
 bot = AsyncTeleBot(TOKEN)
 channel_id = '@SYBERNEST'
 
