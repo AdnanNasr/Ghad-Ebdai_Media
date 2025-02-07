@@ -21,26 +21,10 @@ load_dotenv()
 
 executor = ThreadPoolExecutor()
 
-TOKEN = os.getenv('token')
+# ضع التوكن الخاص بك هنا
+TOKEN = '7850075733:AAHBSWDaK1runrIhIs5Q4AgnTuAdFyoXQrs'
 bot = AsyncTeleBot(TOKEN)
-API_TOKEN = "https://api.telegram.org/bot7850075733:AAHBSWDaK1runrIhIs5Q4AgnTuAdFyoXQrs/setWebhook?url=https://cbd5-185-238-219-112.ngrok-free.app"
-channel_id = '@ghad_ebdai_com'
-
-# app = Flask(__name__)
-
-# application = app
-
-
-
-
-#-----------------------------------------------------------------------------------------------------------------------------------------------------
-# @app.route('/' + TOKEN, methods=['POST'])
-# async def receive_update():
-#     json_str = request.get_data().decode('UTF-8')
-#     update = Update.de_json(json_str)
-#     await bot.process_new_updates([update])  # تأكد من استخدام await
-#     return '!', 200
-
+channel_id = '@SYBERNEST'
 
 
 # الاوامر الاساسية
@@ -56,7 +40,7 @@ async def start(message):
 async def help(message):
     if await chick_follow(message=message):
         help_text = """
-✨ مرحبًا بك في بوت Ghad-Ebdai Media! 🚀
+✨ مرحبًا بك في بوت SyberNest Media! 🚀
 مساعدك الذكي لتحميل ومشاركة المحتوى من مواقع التواصل الاجتماعي بسهولة وسرعة.
 
 🔔 خطوات استخدام البوت:
@@ -81,7 +65,7 @@ async def help(message):
 للبدء، أرسل أمر /start وستظهر لك قائمة بالأزرار المتاحة.
 اضغط على الزر المطلوب، ثم أرسل الرابط المطلوب ليبدأ البوت في تنفيذ الأمر.
 
-💡 استمتع بتجربة سلسة وواجهة مستخدم بسيطة مع Ghad-Ebdai Media!
+💡 استمتع بتجربة سلسة وواجهة مستخدم بسيطة مع SyberNest Media!
 
 """
 
@@ -95,7 +79,7 @@ async def contact(message):
     
     # إضافة أزرار الوصول للمواقع
     buttons = [
-        InlineKeyboardButton("🌐 موقعي الرسمي", url="https://ghad-ebdai.com"),
+        InlineKeyboardButton("🌐 موقعي الرسمي", url="https://sybernest.com"),
         InlineKeyboardButton("📘 صفحتي على فايسبوك", url="https://www.facebook.com/ADN557/"),
         InlineKeyboardButton("💬 حسابي على تيليجرام", url="https://t.me/AdnCyber"),
         InlineKeyboardButton("👨‍💻 حسابي على GitHub", url="https://github.com/AdnanNasr")
@@ -601,7 +585,6 @@ async def transcribe_text(audio_file):
     return transcript.text
 
 
-# تقييد المستخدم
 # -------------------------------------------------------------------------------------------------------------------------------------------------------
 async def is_follow(user_id):
     try:
@@ -616,7 +599,7 @@ async def chick_follow(message):
     user_id = message.from_user.id
     if not await is_follow(user_id):
         markup = InlineKeyboardMarkup()
-        item = InlineKeyboardButton('الاشتراك في القناة', url='https://t.me/ghad_ebdai_com')
+        item = InlineKeyboardButton('الاشتراك في القناة', url='https://t.me/sybernest')
         markup.add(item)
         await bot.send_message(user_id, 'يرجى الاشتراك في القناة من اجل استخدام البوت: ', reply_markup=markup)
         return False
@@ -625,5 +608,3 @@ async def chick_follow(message):
 
 # تشغيل البوت
 asyncio.run(bot.infinity_polling())
-
-# asyncio.run(app.run(port=8000, host="0.0.0.0"))
