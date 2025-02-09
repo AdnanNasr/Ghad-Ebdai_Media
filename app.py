@@ -23,7 +23,7 @@ executor = ThreadPoolExecutor()
 
 # ضع التوكن الخاص بك هنا
 TOKEN = 'TELEGRAM_TOKEN_HERE'
-bot = AsyncTeleBot('7850075733:AAHBSWDaK1runrIhIs5Q4AgnTuAdFyoXQrs')
+bot = AsyncTeleBot(TOKEN)
 channel_id = '@SYBERNEST'
 
 
