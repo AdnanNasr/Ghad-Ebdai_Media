@@ -23,7 +23,7 @@ executor = ThreadPoolExecutor()
 
 # ضع التوكن الخاص بك هنا
 TOKEN = 'TELEGRAM_TOKEN_HERE'
-bot = AsyncTeleBot('Token Here')
+bot = AsyncTeleBot('7850075733:AAHBSWDaK1runrIhIs5Q4AgnTuAdFyoXQrs')
 channel_id = '@SYBERNEST'
 
 
@@ -303,7 +303,8 @@ async def handle_url_message(message):
 #---------------------------------------------------------------------------------------------------------------------------------
 # دالة تحميل الفيديوهات
 async def ready_download_video(message):
-    if await chick_follow(message):
+    try:
+        if await chick_follow(message):
                 downloading = await bot.send_message(message.chat.id, 'جاري تحميل الفيديو...')
                 video_files = await download_video(message.text)
                 for file in video_files:
@@ -311,13 +312,17 @@ async def ready_download_video(message):
                         await bot.send_video(message.chat.id, video)
                     os.remove(file)
                 await bot.delete_message(message.chat.id, downloading.message_id)
-    else:
-        bot.send_message(chat_id=channel_id, text='لم يتم تنزيل الفيديو')
-        return
+    except Exception as e:
+        await bot.send_message(
+            chat_id=message.chat.id,
+            text='لم يتم تنزيل الفيديو'
+        )
+   
 
 # دالة تحميل الأصوات
 async def ready_download_audio(message):
-    if await chick_follow(message):
+    try:
+        if await chick_follow(message):
                 downloading = await bot.send_message(message.chat.id, 'جاري تحميل الصوت...')
                 audio_files = await download_audio(message.text)
                 for file in audio_files:
@@ -325,10 +330,17 @@ async def ready_download_audio(message):
                         await bot.send_audio(message.chat.id, audio)
                     os.remove(file)
                 await bot.delete_message(message.chat.id, downloading.message_id)
+    except Exception as e:
+        await bot.send_message(
+            chat_id=message.chat.id,
+            text='لم يتم تنزيل الصوت.'
+        )
+
 
 # دالة تحميل الصور المصغرة
 async def ready_download_thumbnail(message):
-    if await chick_follow(message):
+    try:
+        if await chick_follow(message):
                 downloading = await bot.send_message(message.chat.id, 'جاري تحميل الصور المصغرة...')
                 thumbnail_files = await download_thumbnail(message.text)
 
@@ -344,10 +356,17 @@ async def ready_download_thumbnail(message):
                     os.remove(thumbnail_files)
 
                 await bot.delete_message(message.chat.id, downloading.message_id)
+    except Exception as e:
+        await bot.send_message(
+            chat_id=message.chat.id,
+            text='لم يتم تحميل الصورة المصغرة.'
+        )
+
 
 # دالة استخراج النصوص
 async def reaey_extract_text(message):
-    if await chick_follow(message):
+    try:
+        if await chick_follow(message):
                 try:
                     
                     downloading = await bot.send_message(message.chat.id, 'جاري استخراج النص من الفيديو...')
@@ -392,6 +411,12 @@ async def reaey_extract_text(message):
 
                     except Exception as f:
                         print(f'Error: {f}')
+    except Exception as e:
+        await bot.send_message(
+            chat_id=message.chat.id,
+            text='لم يتم استخراج النص.'
+        )
+
 
 # دوال التحميل الخام
 #-----------------------------------------------------------------------------------------------------------------------------------
