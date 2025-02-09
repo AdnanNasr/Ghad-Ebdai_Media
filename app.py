@@ -167,6 +167,7 @@ async def btn_handler(call):
         await bot.answer_callback_query(call.id, 'ارسل رابط الفيديو')
         video_text = await bot.send_message(user_id, 'ارسل رابط الفيديو الذي تريد تحميله.', reply_markup=markup)
         send_messages[user_id] = video_text.message_id
+        
 
     elif call.data == 'download_audio':
         user_selected[user_id] = 'download_audio'
@@ -310,6 +311,9 @@ async def ready_download_video(message):
                         await bot.send_video(message.chat.id, video)
                     os.remove(file)
                 await bot.delete_message(message.chat.id, downloading.message_id)
+    else:
+        bot.send_message(chat_id=channel_id, text='لم يتم تنزيل الفيديو')
+        return
 
 # دالة تحميل الأصوات
 async def ready_download_audio(message):
