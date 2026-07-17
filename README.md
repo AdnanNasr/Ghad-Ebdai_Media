@@ -3,297 +3,666 @@
 <div align="center">
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white)
-![Telegram](https://img.shields.io/badge/Telegram-Bot-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)
-![yt-dlp](https://img.shields.io/badge/yt--dlp-Powered-red?style=for-the-badge&logo=youtube&logoColor=white)
-![AssemblyAI](https://img.shields.io/badge/AssemblyAI-STT-purple?style=for-the-badge)
+![Telegram Bot API](https://img.shields.io/badge/Telegram-Bot_API-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)
+![yt-dlp](https://img.shields.io/badge/yt--dlp-Media_Downloader-red?style=for-the-badge&logo=youtube&logoColor=white)
+![AssemblyAI](https://img.shields.io/badge/AssemblyAI-Speech--to--Text-purple?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-**A powerful Telegram bot for downloading and extracting media content from social media platforms — powered by AI.**
+<br>
 
-[Features](#-features) • [Requirements](#-requirements) • [Setup](#-setup) • [Usage](#-usage) • [Contact](#-contact)
+**A modern Telegram bot for downloading, extracting, and processing multimedia content from hundreds of websites supported by `yt-dlp`, with optional AI-powered speech transcription using AssemblyAI.**
 
 ---
+
+### 📚 Navigation
+
+[Overview](#-overview) •
+[Features](#-features) •
+[Supported Platforms](#-supported-platforms) •
+[Requirements](#-requirements) •
+[Installation](#-installation) •
+[Configuration](#-configuration) •
+[Usage](#-usage) •
+[Project Structure](#-project-structure) •
+[Dependencies](#-key-dependencies) •
+[Contributing](#-contributing) •
+[License](#-license) •
+[Contact](#-contact)
 
 </div>
 
-## 📋 Overview
+---
 
-**Ghad Ebdai Media Bot** is a feature-rich Telegram bot built with Python that allows users to download and process media content from YouTube and other supported platforms. It leverages `yt-dlp` for robust media downloading and **AssemblyAI** for AI-powered speech-to-text transcription — all through a simple and intuitive Telegram interface.
+# 📋 Overview
 
-The bot enforces channel subscription before granting access, ensuring a growing and engaged community.
+**Ghad Ebdai Media Bot** is an open-source Telegram bot built with **Python** that allows users to download, extract, and process multimedia content from YouTube and hundreds of other websites supported by **yt-dlp**.
+
+The bot provides a simple conversational interface inside Telegram while offering advanced media processing capabilities, including:
+
+- High-quality video downloads
+- Audio extraction
+- Thumbnail downloading
+- Subtitle extraction
+- AI-powered speech transcription
+- Automatic channel membership verification
+
+Whenever subtitles are unavailable, the bot can automatically transcribe speech using **AssemblyAI**, making it possible to generate text directly from the audio.
 
 ---
 
-## ✨ Features
+# ✨ Features
 
 | Feature | Description |
-|---|---|
-| 🎬 **Video Download** | Download the best quality video from any supported URL |
-| 🎵 **Audio Extraction** | Extract the best audio track from any video link |
-| 🖼️ **Thumbnail Download** | Grab the video thumbnail as a JPEG image |
-| 📝 **Text Extraction** | Extract transcripts from YouTube videos via subtitles or AI |
-| 🤖 **AI Transcription** | Uses AssemblyAI with auto language detection as a fallback |
-| 🔒 **Channel Guard** | Only subscribed members can use the bot |
-| ⌨️ **Dual Interface** | Supports both slash commands (`/video`, `/audio`) and inline buttons |
+|---------|-------------|
+| 🎬 **Video Download** | Download the highest available video quality from supported websites |
+| 🎵 **Audio Extraction** | Extract the best available audio stream from any supported video |
+| 🖼️ **Thumbnail Download** | Download video thumbnails as JPEG images |
+| 📝 **Subtitle Extraction** | Retrieve subtitles directly from YouTube whenever available |
+| 🤖 **AI Speech-to-Text** | Automatically transcribe speech using AssemblyAI when subtitles are unavailable |
+| 🌍 **Automatic Language Detection** | Detect spoken language automatically during AI transcription |
+| 🔒 **Channel Subscription Guard** | Restrict bot usage to subscribed Telegram channel members |
+| ⚡ **Fast Processing** | Efficient downloading and media processing |
+| ⌨️ **Dual User Interface** | Supports both interactive buttons and slash commands |
+| 📱 **Simple User Experience** | Designed for fast and intuitive interaction |
 
 ---
 
-## 🛠️ Requirements
+# 🌐 Supported Platforms
 
-- Python **3.10** or higher
-- A **Telegram Bot Token** (from [@BotFather](https://t.me/BotFather))
-- An **AssemblyAI API Key** (from [assemblyai.com](https://www.assemblyai.com/))
-- `ffmpeg` installed and available in your system `PATH` (required by yt-dlp for some formats)
+The bot supports **YouTube** and hundreds of additional websites through **yt-dlp**, including:
+
+- YouTube
+- YouTube Shorts
+- TikTok
+- Instagram
+- Facebook
+- X (Twitter)
+- Vimeo
+- SoundCloud
+- Twitch
+- Dailymotion
+
+…and many more platforms officially supported by **yt-dlp**.
 
 ---
 
-## 🚀 Setup
+# 🛠️ Requirements
 
-### Step 1 — Create a Telegram Bot Token
+Before running the project, make sure you have the following installed:
 
-1. Open Telegram and search for [@BotFather](https://t.me/BotFather).
-2. Start a chat and send the command: `/newbot`
-3. Follow the on-screen instructions to name your bot.
-4. Copy the **API Token** provided — you'll need it in the next step.
+- Python **3.10** or newer
+- **ffmpeg** (required for audio extraction and media processing)
+- Git
+- Internet connection
 
-### Step 2 — Clone the Repository
+You'll also need:
+
+- A Telegram Bot Token from **@BotFather**
+- An AssemblyAI API Key (optional but recommended for AI transcription)
+
+---
+
+# 📥 Installation
+
+## 1. Clone the repository
 
 ```bash
 git clone https://github.com/AdnanNasr/Ghad-Ebdai_Media.git
+```
+
+```bash
 cd Ghad-Ebdai_Media
 ```
 
-### Step 3 — Install Dependencies
+## 2. Install the required packages
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step 4 — Configure the Bot
+---
 
-Open `app.py` and set the following values:
+# 🇸🇦 بوت غد إبداعي للوسائط
 
-```python
-# Your Telegram Bot Token
-TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN_HERE'
+<div align="center">
 
-# Your Telegram channel username (for subscription check)
-channel_id = '@YOUR_CHANNEL_USERNAME'
+**بوت تيليجرام حديث لتحميل واستخراج ومعالجة الوسائط من مئات المواقع التي يدعمها `yt-dlp`، مع إمكانية تحويل الكلام إلى نص باستخدام الذكاء الاصطناعي عبر AssemblyAI.**
+
+</div>
+
+---
+
+# 📋 نظرة عامة
+
+**بوت غد إبداعي للوسائط** هو مشروع مفتوح المصدر مبني بلغة **Python**، يتيح للمستخدمين تحميل ومعالجة الوسائط من يوتيوب ومئات المواقع الأخرى التي يدعمها **yt-dlp**.
+
+يوفر البوت واجهة سهلة داخل تيليجرام مع مجموعة واسعة من المزايا، مثل:
+
+- تحميل الفيديو بأعلى جودة
+- استخراج الصوت
+- تحميل الصورة المصغرة
+- استخراج الترجمة
+- تحويل الكلام إلى نص بالذكاء الاصطناعي
+- التحقق من الاشتراك في قناة تيليجرام
+
+عند عدم توفر ترجمة للفيديو، يستخدم البوت **AssemblyAI** لتحويل الصوت إلى نص مع دعم الكشف التلقائي عن اللغة.
+
+---
+
+# ✨ المميزات
+
+| الميزة | الوصف |
+|---------|--------|
+| 🎬 **تحميل الفيديو** | تحميل الفيديو بأفضل جودة متاحة |
+| 🎵 **استخراج الصوت** | استخراج أفضل مسار صوتي من الفيديو |
+| 🖼️ **تحميل الصورة المصغرة** | تنزيل الصورة المصغرة بصيغة JPEG |
+| 📝 **استخراج الترجمة** | جلب ترجمة يوتيوب مباشرةً عند توفرها |
+| 🤖 **تحويل الكلام إلى نص** | استخدام AssemblyAI عند عدم وجود ترجمة |
+| 🌍 **الكشف التلقائي عن اللغة** | التعرف على لغة المتحدث تلقائياً |
+| 🔒 **التحقق من الاشتراك** | السماح باستخدام البوت للمشتركين فقط |
+| ⚡ **معالجة سريعة** | سرعة في تحميل ومعالجة الوسائط |
+| ⌨️ **واجهة مزدوجة** | يدعم الأوامر والأزرار التفاعلية |
+| 📱 **سهولة الاستخدام** | واجهة بسيطة وسهلة لجميع المستخدمين |
+
+---
+
+# 🌐 المنصات المدعومة
+
+يدعم البوت جميع المواقع التي يدعمها **yt-dlp**، ومن أشهرها:
+
+- YouTube
+- YouTube Shorts
+- TikTok
+- Instagram
+- Facebook
+- X (Twitter)
+- Vimeo
+- SoundCloud
+- Twitch
+- Dailymotion
+
+بالإضافة إلى مئات المواقع الأخرى.
+
+---
+
+# 🛠️ المتطلبات
+
+قبل تشغيل المشروع، تأكد من توفر:
+
+- Python **3.10** أو أحدث
+- ffmpeg
+- Git
+- اتصال بالإنترنت
+
+كما ستحتاج إلى:
+
+- توكن بوت من **@BotFather**
+- مفتاح **AssemblyAI** (اختياري ولكنه موصى به لتحويل الكلام إلى نص)
+
+---
+
+# 📥 التثبيت
+
+## 1. استنساخ المستودع
+
+```bash
+git clone https://github.com/AdnanNasr/Ghad-Ebdai_Media.git
 ```
 
-Create a `.env` file in the project root and add your AssemblyAI key:
+```bash
+cd Ghad-Ebdai_Media
+```
+
+---
+
+# ⚙️ Configuration
+
+Create a `.env` file in the project root and configure the following variables:
 
 ```env
-assemblyAi=YOUR_ASSEMBLYAI_API_KEY_HERE
+BOT_TOKEN=YOUR_TELEGRAM_BOT_TOKEN
+CHANNEL_USERNAME=@YOUR_CHANNEL_USERNAME
+ASSEMBLYAI_API_KEY=YOUR_ASSEMBLYAI_API_KEY
 ```
 
-### Step 5 — Run the Bot
+> **Note**
+>
+> Keep your `.env` file private and never upload it to GitHub.
+
+---
+
+# ▶️ Running the Bot
+
+Start the bot by running:
 
 ```bash
 python app.py
 ```
 
-Your bot is now live and ready to use! 🎉
+If everything is configured correctly, the bot will start listening for incoming Telegram messages.
 
 ---
 
-## 📖 Usage
+# 📖 Usage
 
-### Commands
+After starting the bot:
+
+1. Open your bot in Telegram.
+2. Send the `/start` command.
+3. Subscribe to the required Telegram channel (if prompted).
+4. Choose one of the available options or use a slash command.
+5. Send a supported media URL.
+6. Wait for the bot to process your request.
+7. Receive the requested media or transcript.
+
+---
+
+# 💬 Available Commands
 
 | Command | Description |
-|---|---|
-| `/start` | Launch the bot and show the main menu |
-| `/help` | Display usage instructions |
-| `/video` | Download a video from a URL |
-| `/audio` | Extract audio from a video URL |
-| `/photo` | Download the thumbnail of a video |
-| `/text` | Extract text/transcript from a video |
-| `/contact` | Get developer contact information |
-
-### How It Works
-
-1. Send `/start` to open the interactive button menu **or** use a slash command directly.
-2. Send the URL of the video you want to process.
-3. The bot downloads/processes the media and sends it back to you.
-
-> **Note:** You must be subscribed to the bot's Telegram channel to use it.
+|----------|-------------|
+| `/start` | Start the bot and display the main menu |
+| `/help` | Display help information |
+| `/video` | Download a video |
+| `/audio` | Extract audio from a video |
+| `/photo` | Download the video thumbnail |
+| `/text` | Extract subtitles or generate an AI transcript |
+| `/contact` | Display the developer's contact information |
 
 ---
 
-## 📦 Key Dependencies
+# 📁 Project Structure
+
+```text
+Ghad-Ebdai_Media/
+│
+├── app.py
+├── requirements.txt
+├── .env
+├── .gitignore
+├── README.md
+│
+├── downloads/
+│   ├── videos/
+│   ├── audio/
+│   ├── thumbnails/
+│   └── transcripts/
+│
+└── temp/
+```
+
+> The actual project structure may vary depending on future updates.
+
+---
+
+# 📦 Key Dependencies
 
 | Package | Purpose |
-|---|---|
-| `pyTelegramBotAPI` | Async Telegram Bot framework |
-| `yt-dlp` | Media downloading engine |
-| `assemblyai` | AI-powered speech-to-text transcription |
-| `youtube-transcript-api` | Fetch YouTube subtitles directly |
-| `Pillow` | Image processing (WebP → JPEG conversion) |
-| `aiofiles` | Async file I/O operations |
-| `python-dotenv` | Load environment variables from `.env` |
-| `nest-asyncio` | Nested async event loop support |
+|----------|---------|
+| pyTelegramBotAPI | Telegram Bot framework |
+| yt-dlp | Download videos and audio from supported websites |
+| assemblyai | AI speech-to-text transcription |
+| youtube-transcript-api | Retrieve YouTube subtitles |
+| Pillow | Convert and process images |
+| aiofiles | Asynchronous file operations |
+| python-dotenv | Load environment variables |
+| nest-asyncio | Nested async event loop support |
 
 ---
 
-## 📁 Project Structure
+# 🔄 Processing Workflow
 
+```text
+User
+   │
+   ▼
+Telegram Bot
+   │
+   ▼
+Validate Channel Subscription
+   │
+   ▼
+Receive URL
+   │
+   ▼
+yt-dlp
+   │
+   ├──────────────► Video
+   │
+   ├──────────────► Audio
+   │
+   ├──────────────► Thumbnail
+   │
+   └──────────────► Subtitle
+                       │
+                       ▼
+               AssemblyAI (Fallback)
+                       │
+                       ▼
+                 Send Result
 ```
+
+---
+
+# 🇸🇦 الإعداد
+
+أنشئ ملفًا باسم `.env` داخل مجلد المشروع وأضف المتغيرات التالية:
+
+```env
+BOT_TOKEN=YOUR_TELEGRAM_BOT_TOKEN
+CHANNEL_USERNAME=@YOUR_CHANNEL_USERNAME
+ASSEMBLYAI_API_KEY=YOUR_ASSEMBLYAI_API_KEY
+```
+
+> **ملاحظة**
+>
+> لا تقم برفع ملف `.env` إلى GitHub لأنه يحتوي على معلومات حساسة.
+
+---
+
+# ▶️ تشغيل البوت
+
+بعد الانتهاء من الإعداد، شغّل البوت بواسطة:
+
+```bash
+python app.py
+```
+
+إذا كانت جميع الإعدادات صحيحة فسيبدأ البوت باستقبال الرسائل من تيليجرام.
+
+---
+
+# 📖 طريقة الاستخدام
+
+1. افتح البوت في تيليجرام.
+2. أرسل الأمر `/start`.
+3. اشترك في القناة إذا طلب منك ذلك.
+4. اختر العملية المطلوبة أو استخدم أحد الأوامر.
+5. أرسل رابط الوسائط.
+6. انتظر حتى تنتهي المعالجة.
+7. سيقوم البوت بإرسال النتيجة إليك.
+
+---
+
+# 💬 الأوامر
+
+| الأمر | الوصف |
+|---------|--------|
+| `/start` | تشغيل البوت |
+| `/help` | عرض المساعدة |
+| `/video` | تحميل فيديو |
+| `/audio` | استخراج الصوت |
+| `/photo` | تحميل الصورة المصغرة |
+| `/text` | استخراج الترجمة أو تحويل الكلام إلى نص |
+| `/contact` | معلومات المطور |
+
+---
+
+# 📁 هيكل المشروع
+
+```text
 Ghad-Ebdai_Media/
-├── app.py              # Main bot application
-├── requirements.txt    # Python dependencies
-├── .env                # Environment variables (not committed)
-├── .gitignore          # Git ignore rules
-└── README.md           # Project documentation
+│
+├── app.py
+├── requirements.txt
+├── .env
+├── .gitignore
+├── README.md
+│
+├── downloads/
+│   ├── videos/
+│   ├── audio/
+│   ├── thumbnails/
+│   └── transcripts/
+│
+└── temp/
+```
+
+> قد يختلف هيكل المشروع قليلاً مع الإصدارات المستقبلية.
+
+---
+
+# 📦 المكتبات الرئيسية
+
+| المكتبة | الاستخدام |
+|----------|-----------|
+| pyTelegramBotAPI | إنشاء بوت تيليجرام |
+| yt-dlp | تحميل الفيديوهات والصوت |
+| assemblyai | تحويل الكلام إلى نص |
+| youtube-transcript-api | استخراج ترجمة يوتيوب |
+| Pillow | معالجة الصور |
+| aiofiles | التعامل مع الملفات بشكل غير متزامن |
+| python-dotenv | قراءة متغيرات البيئة |
+| nest-asyncio | دعم الحلقات غير المتزامنة |
+
+---
+
+# 🔄 آلية عمل البوت
+
+```text
+المستخدم
+     │
+     ▼
+بوت تيليجرام
+     │
+     ▼
+التحقق من الاشتراك
+     │
+     ▼
+استقبال الرابط
+     │
+     ▼
+yt-dlp
+     │
+     ├────────► فيديو
+     ├────────► صوت
+     ├────────► صورة مصغرة
+     └────────► ترجمة
+                     │
+                     ▼
+                AssemblyAI
+                     │
+                     ▼
+            إرسال النتيجة للمستخدم
+```
+
+## 2. تثبيت المكتبات
+
+```bash
+pip install -r requirements.txt
 ```
 
 ---
 
-## 👨‍💻 Contact
+# 🤝 Contributing
+
+Contributions are welcome and appreciated.
+
+If you want to improve the project, fix bugs, or add new features:
+
+1. Fork the repository.
+2. Create a new branch:
+
+```bash
+git checkout -b feature/new-feature
+```
+
+3. Make your changes.
+4. Commit your changes:
+
+```bash
+git commit -m "Add new feature"
+```
+
+5. Push your branch:
+
+```bash
+git push origin feature/new-feature
+```
+
+6. Open a Pull Request.
+
+Before making major changes, please open an issue to discuss your idea.
+
+---
+
+# 🐛 Reporting Issues
+
+If you find a bug or have a suggestion:
+
+- Open a GitHub Issue.
+- Describe the problem clearly.
+- Include steps to reproduce the issue.
+- Provide logs or screenshots if available.
+
+This helps improve the project faster.
+
+---
+
+# ⭐ Support the Project
+
+If you find this project useful:
+
+- Give it a ⭐ on GitHub.
+- Share it with others.
+- Report bugs and suggest improvements.
+
+Your support helps the project continue growing.
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**.
+
+You are free to use, modify, and distribute this software according to the terms of the license.
+
+See the `LICENSE` file for more information.
+
+---
+
+# 👨‍💻 Contact
 
 Developed by **Adnan Nasr**
 
-[![Website](https://img.shields.io/badge/🌐_Website-adnannasr.com-blue?style=flat-square)](https://adnannasr.com)
-[![Facebook](https://img.shields.io/badge/📘_Facebook-ADN557-1877F2?style=flat-square&logo=facebook&logoColor=white)](https://www.facebook.com/ADN557/)
-[![Telegram](https://img.shields.io/badge/💬_Telegram-@AdnCyber-26A5E4?style=flat-square&logo=telegram&logoColor=white)](https://t.me/AdnCyber)
-[![GitHub](https://img.shields.io/badge/👨‍💻_GitHub-AdnanNasr-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/AdnanNasr)
+<div align="center">
+
+[![Website](https://img.shields.io/badge/Website-adnannasr.com-blue?style=flat-square)](https://adnannasr.com)
+
+[![Facebook](https://img.shields.io/badge/Facebook-ADN557-1877F2?style=flat-square&logo=facebook&logoColor=white)](https://www.facebook.com/ADN557/)
+
+[![Telegram](https://img.shields.io/badge/Telegram-@AdnCyber-26A5E4?style=flat-square&logo=telegram&logoColor=white)](https://t.me/AdnCyber)
+
+[![GitHub](https://img.shields.io/badge/GitHub-AdnanNasr-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/AdnanNasr)
+
+</div>
 
 ---
 
 <div align="center">
 
----
+**Built with Python, Telegram Bot API, yt-dlp, and AI technologies.**
 
-# 🤖 بوت غد إبداعي للوسائط
+<br>
 
-**بوت تيليجرام قوي لتحميل واستخراج محتوى الوسائط من منصات التواصل الاجتماعي — مدعوم بالذكاء الاصطناعي.**
+© 2026 Adnan Nasr
 
 </div>
 
-## 📋 نظرة عامة
-
-**بوت غد إبداعي للوسائط** هو بوت تيليجرام متكامل مبني بلغة Python، يتيح للمستخدمين تحميل ومعالجة محتوى الوسائط من يوتيوب والمنصات المدعومة الأخرى. يستخدم البوت `yt-dlp` لتحميل الوسائط بشكل موثوق، و**AssemblyAI** لتحويل الكلام إلى نص بالذكاء الاصطناعي — وكل ذلك من خلال واجهة تيليجرام بسيطة وسهلة الاستخدام.
-
-يشترط البوت الاشتراك في القناة قبل منح الوصول لضمان مجتمع متنامٍ ومتفاعل.
 
 ---
 
-## ✨ المميزات
+# 🇸🇦 المساهمة في المشروع
 
-| الميزة | الوصف |
-|---|---|
-| 🎬 **تحميل الفيديو** | تحميل الفيديو بأفضل جودة من أي رابط مدعوم |
-| 🎵 **استخراج الصوت** | استخراج أفضل مسار صوتي من أي رابط فيديو |
-| 🖼️ **تحميل الصورة المصغرة** | الحصول على الصورة المصغرة للفيديو بصيغة JPEG |
-| 📝 **استخراج النص** | استخراج النصوص من فيديوهات يوتيوب عبر الترجمة أو الذكاء الاصطناعي |
-| 🤖 **النسخ بالذكاء الاصطناعي** | يستخدم AssemblyAI مع كشف اللغة التلقائي كخيار احتياطي |
-| 🔒 **حماية القناة** | الأعضاء المشتركون فقط يمكنهم استخدام البوت |
-| ⌨️ **واجهة مزدوجة** | يدعم الأوامر (`/video`, `/audio`) والأزرار التفاعلية |
+المساهمات مرحب بها ومقدّرة.
 
----
+إذا كنت ترغب في تطوير المشروع أو إصلاح الأخطاء أو إضافة ميزات جديدة:
 
-## 🛠️ المتطلبات
-
-- Python **3.10** أو أحدث
-- **توكن بوت تيليجرام** (من [@BotFather](https://t.me/BotFather))
-- **مفتاح API لـ AssemblyAI** (من [assemblyai.com](https://www.assemblyai.com/))
-- تثبيت `ffmpeg` وإضافته إلى متغيرات النظام `PATH` (مطلوب من `yt-dlp` لبعض الصيغ)
-
----
-
-## 🚀 طريقة الإعداد
-
-### الخطوة 1 — إنشاء توكن بوت تيليجرام
-
-1. افتح تيليجرام وابحث عن [@BotFather](https://t.me/BotFather).
-2. ابدأ محادثة وأرسل الأمر: `/newbot`
-3. اتبع التعليمات لتسمية البوت.
-4. انسخ **التوكن** المُقدَّم — ستحتاجه في الخطوة التالية.
-
-### الخطوة 2 — استنساخ المستودع
+1. قم بعمل Fork للمستودع.
+2. أنشئ فرعًا جديدًا:
 
 ```bash
-git clone https://github.com/AdnanNasr/Ghad-Ebdai_Media.git
-cd Ghad-Ebdai_Media
+git checkout -b feature/new-feature
 ```
 
-### الخطوة 3 — تثبيت المكتبات
+3. قم بإجراء التعديلات المطلوبة.
+4. أنشئ Commit:
 
 ```bash
-pip install -r requirements.txt
+git commit -m "Add new feature"
 ```
 
-### الخطوة 4 — ضبط الإعدادات
-
-افتح ملف `app.py` وعدّل القيم التالية:
-
-```python
-# توكن البوت الخاص بك
-TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN_HERE'
-
-# معرف قناتك على تيليجرام (للتحقق من الاشتراك)
-channel_id = '@YOUR_CHANNEL_USERNAME'
-```
-
-أنشئ ملف `.env` في مجلد المشروع وأضف مفتاح AssemblyAI:
-
-```env
-assemblyAi=YOUR_ASSEMBLYAI_API_KEY_HERE
-```
-
-### الخطوة 5 — تشغيل البوت
+5. ارفع التغييرات:
 
 ```bash
-python app.py
+git push origin feature/new-feature
 ```
 
-البوت الآن يعمل وجاهز للاستخدام! 🎉
+6. قم بفتح Pull Request.
+
+قبل إجراء تغييرات كبيرة، يُفضل فتح Issue لمناقشة الفكرة.
 
 ---
 
-## 📖 طريقة الاستخدام
+# 🐛 الإبلاغ عن المشاكل
 
-### الأوامر
+إذا وجدت خطأ أو لديك اقتراح:
 
-| الأمر | الوصف |
-|---|---|
-| `/start` | تشغيل البوت وعرض القائمة الرئيسية |
-| `/help` | عرض تعليمات الاستخدام |
-| `/video` | تحميل فيديو من رابط |
-| `/audio` | استخراج الصوت من رابط فيديو |
-| `/photo` | تحميل الصورة المصغرة لفيديو |
-| `/text` | استخراج نص أو ترجمة من فيديو |
-| `/contact` | الحصول على معلومات التواصل مع المطور |
+- افتح Issue في GitHub.
+- اشرح المشكلة بشكل واضح.
+- أضف خطوات إعادة ظهور المشكلة.
+- أرفق السجلات أو الصور إن وجدت.
 
-### كيف يعمل البوت
-
-1. أرسل `/start` لفتح قائمة الأزرار التفاعلية **أو** استخدم أحد الأوامر مباشرةً.
-2. أرسل رابط الفيديو الذي تريد معالجته.
-3. يقوم البوت بتحميل أو معالجة الوسائط وإرسالها إليك.
-
-> **ملاحظة:** يجب أن تكون مشتركًا في قناة البوت على تيليجرام لاستخدامه.
+هذا يساعد على تحسين المشروع بشكل أسرع.
 
 ---
 
-## 📦 المكتبات الرئيسية
+# ⭐ دعم المشروع
 
-| المكتبة | الغرض |
-|---|---|
-| `pyTelegramBotAPI` | إطار عمل بوت تيليجرام غير المتزامن |
-| `yt-dlp` | محرك تحميل الوسائط |
-| `assemblyai` | تحويل الكلام إلى نص بالذكاء الاصطناعي |
-| `youtube-transcript-api` | جلب ترجمات يوتيوب مباشرةً |
-| `Pillow` | معالجة الصور (تحويل WebP إلى JPEG) |
-| `aiofiles` | عمليات ملفات غير متزامنة |
-| `python-dotenv` | تحميل متغيرات البيئة من ملف `.env` |
-| `nest-asyncio` | دعم حلقة الأحداث غير المتزامنة المتداخلة |
+إذا وجدت المشروع مفيدًا:
+
+- قم بإعطائه ⭐ على GitHub.
+- شاركه مع الآخرين.
+- ساهم بالإبلاغ عن الأخطاء واقتراح التحسينات.
+
+دعمك يساعد على استمرار تطوير المشروع.
 
 ---
 
-## 👨‍💻 التواصل
+# 📄 الترخيص
 
-تطوير **عدنان نصر**
-[![Website](https://img.shields.io/badge/🌐_Website-adnannasr.com-blue?style=flat-square)](https://adnannasr.com)
-[![Facebook](https://img.shields.io/badge/📘_Facebook-ADN557-1877F2?style=flat-square&logo=facebook&logoColor=white)](https://www.facebook.com/ADN557/)
-[![Telegram](https://img.shields.io/badge/💬_Telegram-@AdnCyber-26A5E4?style=flat-square&logo=telegram&logoColor=white)](https://t.me/AdnCyber)
-[![GitHub](https://img.shields.io/badge/👨‍💻_GitHub-AdnanNasr-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/AdnanNasr)
+هذا المشروع مرخص تحت **رخصة MIT**.
+
+يمكنك استخدام المشروع وتعديله وتوزيعه وفق شروط الرخصة.
+
+راجع ملف `LICENSE` للمزيد من المعلومات.
+
+---
+
+# 👨‍💻 التواصل
+
+تم تطوير المشروع بواسطة **Adnan Nasr**
+
+<div align="center">
+
+[![Website](https://img.shields.io/badge/Website-adnannasr.com-blue?style=flat-square)](https://adnannasr.com)
+
+[![Facebook](https://img.shields.io/badge/Facebook-ADN557-1877F2?style=flat-square&logo=facebook&logoColor=white)](https://www.facebook.com/ADN557/)
+
+[![Telegram](https://img.shields.io/badge/Telegram-@AdnCyber-26A5E4?style=flat-square&logo=telegram&logoColor=white)](https://t.me/AdnCyber)
+
+[![GitHub](https://img.shields.io/badge/GitHub-AdnanNasr-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/AdnanNasr)
+
+</div>
+
+---
+
+<div align="center">
+
+**تم تطويره باستخدام Python و Telegram Bot API و yt-dlp وتقنيات الذكاء الاصطناعي.**
+
+<br>
+
+© 2026 Adnan Nasr
+
+</div>
